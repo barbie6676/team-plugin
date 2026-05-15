@@ -10,7 +10,7 @@
     {
       "name": "team-plugin",
       "description": "Shared skills for the team including screenshot cleaner",
-      "source": ".",
+      "source": "./",
       "category": "productivity"
     }
   ]
