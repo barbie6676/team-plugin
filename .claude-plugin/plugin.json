@@ -5,15 +5,5 @@
   "author": {
     "name": "Xiaojing"
   },
-  "repository": "https://github.com/barbie6676/team-plugin",
-  "skills": [
-    {
-      "name": "screenshot-cleaner",
-      "path": "skills/screenshot-cleaner/SKILL.md"
-    },
-    {
-      "name": "skill-creator",
-      "path": "skills/skill-creator/SKILL.md"
-    }
-  ]
+  "repository": "https://github.com/barbie6676/team-plugin"
 }
