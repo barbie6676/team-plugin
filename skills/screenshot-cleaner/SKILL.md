@@ -63,7 +63,10 @@ A Slack conversation in #eng-infra discussing a failed deployment on March 14.
 Delete this? [y/n]
 ```
 
-- **y** → delete the file immediately from the target folder, print `Deleted. ✓`, move to the next
+- **y** → delete the file immediately using AppleScript (moves to Trash), print `Deleted. ✓`, move to the next:
+  ```bash
+  osascript -e 'tell application "Finder" to delete POSIX file "FULL/PATH/TO/FILE.png"'
+  ```
 - **n** → proceed to 2c
 
 ### 2c. Offer to rename, then move to monthly folder (only if user chose to keep)
@@ -94,7 +97,7 @@ Extract the year and month from the original filename (e.g., `Screenshot 2026-05
 
 ```bash
 mkdir -p TARGET/Screenshots/2026-05
-mv TARGET/"Screenshot 2026-05-14 at 3.17.44 PM.png" TARGET/Screenshots/2026-05/
+osascript -e 'tell application "Finder" to move POSIX file "TARGET/Screenshot 2026-05-14 at 3.17.44 PM.png" to POSIX file "TARGET/Screenshots/2026-05/"'
 ```
 
 Print `Moved to Screenshots/2026-05/. ✓`
@@ -116,6 +119,7 @@ If everything was deleted, say so and note that no folders were created.
 ## Notes
 
 - Never delete a file without explicit "y" from the user.
+- Use `osascript` (AppleScript via Finder) for all file deletions and moves — `rm` and `mv` fail silently on macOS Desktop due to sandboxing. Deletion moves files to Trash (recoverable). `mkdir -p` still works for creating the destination folders.
 - If the user types something other than y/n, ask again — don't guess.
 - If a suggested rename already exists in the destination folder, append `-2`, `-3`, etc.
 - If the user wants to stop mid-way (e.g., "stop", "quit", "that's enough"), print a partial summary and stop gracefully.
